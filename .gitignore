@@ -5,3 +5,5 @@ NWU_ACM_MIS/config.py
 db.sqlite3
 
 .DS_Store
+
+__pycache__/
