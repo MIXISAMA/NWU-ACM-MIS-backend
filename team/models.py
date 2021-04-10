@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+from person.models import User
 
 class Team(models.Model):
     name = models.CharField('队伍名', max_length=30 )

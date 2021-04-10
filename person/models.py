@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Contirbute(models.Model):
 
     class ContributeType(models.TextChoices):
-        VOLUNTEER = 'VO', '志愿者'
+        VOLUNTEER = 'VO', '志愿'
         CLEANING = 'CL', '清理'
         TEACHING = 'TE', '教学'
         QUESTION = 'QS', '出题'
@@ -67,7 +67,7 @@ class Contirbute(models.Model):
 
 class Region(models.Model):
     name = models.CharField('板块名', max_length=12)
-    user = models.ManyToManyField(User, verbose_name='队员', related_name='regions')
+    users = models.ManyToManyField(User, verbose_name='队员', related_name='regions')
 
     class Meta:
         verbose_name = verbose_name_plural = '板块'
