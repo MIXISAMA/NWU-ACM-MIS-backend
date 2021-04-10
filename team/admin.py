@@ -2,7 +2,7 @@ from django.contrib import admin
 from team.models import Team, Contest, TeamContest, Reward
 
 
-# Register your models here.
+#Register your models here.
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     pass
