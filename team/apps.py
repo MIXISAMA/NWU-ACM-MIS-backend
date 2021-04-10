@@ -5,3 +5,4 @@ class TeamConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'team'
     verbose_name = '队伍'
+
