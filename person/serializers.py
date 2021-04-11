@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from person.models import User, Region
 
+from user.models import User
+
+from person.models import Region
 
 class RegionSerializer(serializers.ModelSerializer):
     class Meta:

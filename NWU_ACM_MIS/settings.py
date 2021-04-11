@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+    'rest_framework.authtoken',
+    'authemail',
+
+    'user',
     'person',
     'team',
 ]
@@ -122,9 +127,32 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 图片为主的静态文件
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'person.User'
+# 用户认证配置
+
+AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+EMAIL_FROM = config.EMAIL_FROM
+EMAIL_BCC = config.EMAIL_BCC
+
+EMAIL_HOST = config.EMAIL_HOST
+EMAIL_PORT = config.EMAIL_PORT
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
+EMAIL_USE_TLS = config.EMAIL_USE_TLS
+EMAIL_USE_SSL = config.EMAIL_USE_SSL

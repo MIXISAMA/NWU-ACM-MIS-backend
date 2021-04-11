@@ -1,10 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
-from person.models import User, Region, Contirbute, Training
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    pass
+from person.models import Region, Contirbute, Training
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
@@ -18,5 +14,3 @@ class ContributeAdmin(admin.ModelAdmin):
 class TrainingAdmin(admin.ModelAdmin):
     fields = ['users', 'date']
     readonly_fields = ['date', ]
-    
-admin.site.unregister(Group)

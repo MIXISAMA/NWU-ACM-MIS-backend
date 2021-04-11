@@ -1,11 +1,10 @@
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from person.serializers import UserSerializer, RegionSerializer
-from person.models import User, Region
 
+from person.serializers import RegionSerializer
+from person.models import Region
 
 class UserList(APIView):
     """用户"""
@@ -45,7 +44,6 @@ class UserList(APIView):
         user = get_object_or_404(User, pk=pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 class RegionList(APIView):
     """板块"""

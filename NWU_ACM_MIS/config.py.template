@@ -1,1 +1,10 @@
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-123412341234123412341234123412341234'
+
+EMAIL_FROM = 'xxx@yyy.zzz'
+EMAIL_BCC = 'aaa@bbb.ccc'
+EMAIL_HOST = 'ddd.eee.fff'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'xxx@yyy.zzz'
+EMAIL_HOST_PASSWORD = 'xcvzxcvzxcv'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
