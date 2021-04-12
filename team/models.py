@@ -1,10 +1,14 @@
 from django.db import models
-from person.models import User
+from user.models import User
 
 class Team(models.Model):
     users = models.ManyToManyField(User, 'teams', verbose_name='队员')
     name = models.CharField('队伍名', max_length=30 )
     disable = models.BooleanField('是否存在', default=False)
+
+    @property
+    def __str__(self):
+        return f"{self.name}"
     
     class Meta:
         verbose_name = verbose_name_plural = '队伍'
@@ -34,6 +38,10 @@ class Contest(models.Model):
     contest_level = models.CharField('比赛分级', max_length=2, choices=ContestLevel.choices)
     class Meta:
         verbose_name = verbose_name_plural = '比赛'
+    
+    @property
+    def __str__(self):
+        return f"{self.name}"
 
 
 class TeamContest(models.Model):
