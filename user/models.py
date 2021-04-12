@@ -24,12 +24,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, stu_id, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         """创建超级用户"""
         extra_fields.setdefault('is_superuser', True)
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        return self.create_user(stu_id=stu_id, password=password, **extra_fields)
+        return self.create_user(email=email, password=password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
     """用户"""
