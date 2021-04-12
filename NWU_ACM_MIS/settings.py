@@ -31,13 +31,15 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    
+    'NWU_ACM_MIS.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     'rest_framework',
     'rest_framework.authtoken',
     'authemail',
@@ -62,7 +64,9 @@ ROOT_URLCONF = 'NWU_ACM_MIS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'user/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,6 +153,8 @@ REST_FRAMEWORK = {
 
 EMAIL_FROM = config.EMAIL_FROM
 EMAIL_BCC = config.EMAIL_BCC
+
+STUDENT_EMAIL_DOMAIN = config.STUDENT_EMAIL_DOMAIN
 
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT

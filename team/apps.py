@@ -6,3 +6,4 @@ class TeamConfig(AppConfig):
     name = 'team'
     verbose_name = '队伍'
 
+    admin_display_priority = 3

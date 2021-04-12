@@ -16,9 +16,9 @@ class UserManager(BaseUserManager):
         if email is None:
             if stu_id is None:
                 raise ValueError('email与stu_id至少提供一个')
-            email = f'{stu_id}@{settings.EMAIL_HOST}'
+            email = f'{stu_id}@{settings.STUDENT_EMAIL_DOMAIN}'
         if nickname is None:
-            nickname = email
+            nickname = email[:10]
         user = self.model(stu_id=stu_id, email=email, nickname=nickname, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -33,16 +33,16 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """用户"""
-    stu_id = models.CharField('学号', max_length=12, null=True, default=None, unique=True)
+    stu_id = models.CharField('学号', max_length=12, null=True, blank=True, default=None, unique=True)
     email = models.EmailField('邮箱', max_length=64, unique=True)
     is_verified = models.BooleanField('是否通过邮箱验证', default=False)
-    cf_id = models.CharField('CF账号', max_length=24, null=True, default=None)
+    cf_id = models.CharField('CF账号', max_length=24, null=True, blank=True, default=None)
     nickname = models.CharField('昵称', max_length=24)
     realname = models.CharField('真实姓名', max_length=32, null=True, blank=True, default=None)
     need_peer = models.BooleanField('是否需要队友', default=False)
-    avatar = models.ImageField('头像', upload_to='avatar', null=True, default=None)
+    avatar = models.ImageField('头像', upload_to='avatar', null=True, blank=True, default=None)
 
-    USERNAME_FIELD = 'stu_id'
+    USERNAME_FIELD = 'email'#'stu_id'
 
     objects = UserManager()
     
@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         if self.stu_id is None:
             return f'{self.email} - {self.nickname}'
-        return f"[{self.stu_id}] {self.nickname}"
+        return f"{self.stu_id} - {self.nickname}"
 
     class Meta:
         verbose_name = verbose_name_plural = '用户'
