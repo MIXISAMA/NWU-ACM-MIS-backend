@@ -102,7 +102,7 @@ class RewardDetail(APIView):
     def put(self, request, pk, format=None):
         """修改奖项"""
         reward = get_object_or_404(Reward, pk=pk)
-        serializer =ContestSerializer(reward, data=request.data)
+        serializer = ContestSerializer(reward, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
