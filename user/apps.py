@@ -5,3 +5,6 @@ class UserConfig(AppConfig):
     verbose_name = '用户'
 
     admin_display_priority = 1
+
+    def ready(self):
+        import user.signals

@@ -33,14 +33,29 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """用户"""
+
+    class Role(models.TextChoices):
+        INTERNAL = 'I', '本校生'
+        NOVICE   = 'N', '萌新'
+        AD       = 'A', '现役'
+        RETIRED  = 'R', '退役'
+        COACH    = 'C', '教练'
+        EXTERNAL = 'E', '外校人士'
+
+
     stu_id = models.CharField('学号', max_length=12, null=True, blank=True, default=None, unique=True)
     email = models.EmailField('邮箱', max_length=64, unique=True)
-    is_verified = models.BooleanField('是否通过邮箱验证', default=False)
-    cf_id = models.CharField('CF账号', max_length=24, null=True, blank=True, default=None)
     nickname = models.CharField('昵称', max_length=24)
     realname = models.CharField('真实姓名', max_length=32, null=True, blank=True, default=None)
-    need_peer = models.BooleanField('是否需要队友', default=False)
     avatar = models.ImageField('头像', upload_to='avatar', null=True, blank=True, default=None)
+    role = models.CharField('用户类型', max_length=1, choices=Role.choices, default=Role.EXTERNAL)
+    date_joined = models.DateTimeField('账号创建日期', auto_now_add=True)
+
+    college = models.CharField('学校', max_length=24, null=True, blank=True, default=None)
+    cf_id = models.CharField('CF账号', max_length=24, null=True, blank=True, default=None)
+    need_peer = models.BooleanField('是否需要队友', default=False)
+
+    is_banned = models.BooleanField('是否拉黑', default=False, help_text='拉黑后无法重新注册')
 
     USERNAME_FIELD = 'email'#'stu_id'
 
@@ -57,5 +72,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         verbose_name = verbose_name_plural = '用户'
-    
 
+
+
+
+class Verification(models.Model):
+    """邮件验证"""
+    email = models.EmailField('邮箱', max_length=64, primary_key=True)
+    code = models.CharField('验证码', max_length=6)
+
+    class Meta:
+        verbose_name = verbose_name_plural = '邮件验证'

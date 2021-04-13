@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'rest_framework.authtoken',
-    'authemail',
 
     'user',
     'person',
@@ -64,9 +63,7 @@ ROOT_URLCONF = 'NWU_ACM_MIS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'user/templates',
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,15 +143,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.User'
 
 REST_FRAMEWORK = {
-	'DEFAULT_AUTHENTICATION_CLASSES': (
-		'rest_framework.authentication.TokenAuthentication',
-    )
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
-EMAIL_FROM = config.EMAIL_FROM
-EMAIL_BCC = config.EMAIL_BCC
-
-STUDENT_EMAIL_DOMAIN = config.STUDENT_EMAIL_DOMAIN
+# 邮件协议配置
 
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
@@ -162,3 +159,11 @@ EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = config.EMAIL_USE_TLS
 EMAIL_USE_SSL = config.EMAIL_USE_SSL
+
+EMAIL_FROM = config.EMAIL_FROM
+STUDENT_EMAIL_DOMAIN = config.STUDENT_EMAIL_DOMAIN
+
+
+# 项目名
+
+PROJECT_VERBOSE_NAME = config.PROJECT_VERBOSE_NAME

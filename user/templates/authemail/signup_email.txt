@@ -1,2 +1,0 @@
-点击下方链接验证身份
-    http://127.0.0.1:8000/user/authemail/signup/verify.html/?code={{ code }}
