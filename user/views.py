@@ -7,6 +7,7 @@ from rest_framework.decorators import (
 )
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
 from util.rest import detail
 
@@ -24,16 +25,20 @@ def email_register(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     try:
+        user_email = serializer.validated_data.get('email')
         verification = Verification.objects.get(
-            email=serializer.validated_data.get('email'),
+            email=user_email,
             code=serializer.validated_data.get('code')
         )
     except Verification.DoesNotExist:
-        return Response(detail('验证失败'), status=status.HTTP_403_FORBIDDEN)
+        return Response(detail('验证码无效'), status=status.HTTP_403_FORBIDDEN)
 
     verification.delete()
     serializer.save()
-    return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+    response = Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+    response.data['token'] = 'Token '+ Token.objects.get(user__email=user_email).key
+    response.set_cookie('token', response.data['token'])
+    return response
     
 
 def gen_random_code(length):
@@ -79,5 +84,6 @@ class EmailAuthToken(ObtainAuthToken):
         """邮箱&密码登入"""
         response = super().post(request, *args, **kwargs)
         response.data['token'] = 'Token '+response.data['token']
-        response.set_cookie('token', response.data['token'])
+        # response.set_cookie('token', response.data['token'], secure=True, samesite='None') # https
+        response.set_cookie('token', response.data['token']) # http
         return response

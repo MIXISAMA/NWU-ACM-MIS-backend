@@ -4,7 +4,7 @@ STUDENT_EMAIL_DOMAIN = 'stumail.nwu.edu.cn'
 
 EMAIL_HOST = 'edu.icoremail.net'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = f'zhangjunbo@{STUDENT_EMAIL_DOMAIN}'
+EMAIL_HOST_USER = f'zhangjunbo@stumail.nwu.edu.cn'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

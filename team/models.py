@@ -6,7 +6,7 @@ class Team(models.Model):
     name = models.CharField('队伍名', max_length=30 )
     disable = models.BooleanField('是否存在', default=False)
 
-    @property
+    # @property
     def __str__(self):
         return f"{self.name}"
     
