@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['*',]
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    'sslserver',
     
     'NWU_ACM_MIS.apps.MyAdminConfig',
     'django.contrib.auth',
