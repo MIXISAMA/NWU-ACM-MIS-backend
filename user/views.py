@@ -65,6 +65,7 @@ def email_verification(request, email):
     if User.objects.filter(email=email).exists():
         return Response(detail('该用户已注册'), status=status.HTTP_403_FORBIDDEN)
     try:
+        # 测试用例认为邮件内容的最后6个字符是验证码
         send_mail(
             '邮箱验证',
             f'{settings.PROJECT_VERBOSE_NAME}感谢您的注册，您的验证码是 {code}',
@@ -76,7 +77,7 @@ def email_verification(request, email):
         return Response(detail('验证邮件发送失败'), status=status.HTTP_412_PRECONDITION_FAILED)
     
     serializer.save()
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 class EmailAuthToken(ObtainAuthToken):
     """邮箱&密码登入"""

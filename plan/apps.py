@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class TeamConfig(AppConfig):
+class PlanConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'team'
-    verbose_name = '队伍'
+    name = 'plan'
+    verbose_name = '日程安排'
 
     admin_display_priority = 3

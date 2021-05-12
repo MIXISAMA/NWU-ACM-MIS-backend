@@ -3,9 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from person.serializers import RegionSerializer
-from person.models import Region
-
 class UserList(APIView):
     """用户"""
     def post(self, request, format=None):
@@ -45,19 +42,19 @@ class UserList(APIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class RegionList(APIView):
-    """板块"""
-    def get(self, request, pk=None, format=None):
-        """查询"""
-        if pk is None:
-            if request.data.__contains__('user'): #根据用户查询有哪些领域
-                regions = Region.objects.filter(users__pk__contains = request.data['user'])
-            else:
-                regions = Region.objects.all()
-            serializer = RegionSerializer(regions, many=True)
-        else:
-            region = get_object_or_404(Region, pk=pk)
-            serializer = RegionSerializer(region)
+# class RegionList(APIView):
+#     """板块"""
+#     def get(self, request, pk=None, format=None):
+#         """查询"""
+#         if pk is None:
+#             if request.data.__contains__('user'): #根据用户查询有哪些领域
+#                 regions = Region.objects.filter(users__pk__contains = request.data['user'])
+#             else:
+#                 regions = Region.objects.all()
+#             serializer = RegionSerializer(regions, many=True)
+#         else:
+#             region = get_object_or_404(Region, pk=pk)
+#             serializer = RegionSerializer(region)
 
-        return Response(serializer.data)
+#         return Response(serializer.data)
 

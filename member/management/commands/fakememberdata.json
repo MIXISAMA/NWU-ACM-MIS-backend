@@ -1,0 +1,80 @@
+{
+    "Team": [
+        {
+            "name_ch": "测试队伍1",
+            "name_en": "test_team_1"
+        },
+        {
+            "name_ch": "测试队伍2",
+            "name_en": "test_team_2"
+        }
+    ],
+    "Member": [
+        {
+            "email": "wrong7@wrong.wrong",
+            "role": "N",
+            "stu_id": "2019123001",
+            "realname": "测试姓名1",
+            "college": "软件学院",
+            "department": "软件工程",
+            "grade": 2019,
+            "cf_id": "wrong_cf_id_1",
+            "vj_id": "wrong_vj_id_1"
+        },
+        {
+            "email": "wrong8@wrong.wrong",
+            "role": "N",
+            "stu_id": "2019123002",
+            "realname": "测试姓名2",
+            "college": "信息科学与技术学院",
+            "department": "物联网工程",
+            "grade": 2019,
+            "cf_id": "wrong_cf_id_2",
+            "vj_id": "wrong_vj_id_2"
+        },
+        {
+            "email": "wrong9@wrong.wrong",
+            "role": "A",
+            "stu_id": "2018123003",
+            "realname": "测试姓名3",
+            "college": "信息科学与技术学院",
+            "department": "中外电子",
+            "grade": 2018,
+            "cf_id": "wrong_cf_id_3",
+            "vj_id": "wrong_vj_id_3"
+        },
+        {
+            "email": "wrong10@wrong.wrong",
+            "role": "A",
+            "stu_id": "2018123004",
+            "realname": "测试姓名4",
+            "college": "信息科学与技术学院",
+            "department": "计算机科学与技术",
+            "grade": 2018,
+            "cf_id": "wrong_cf_id_4",
+            "vj_id": "wrong_vj_id_4"
+        },
+        {
+            "email": "wrong11@wrong.wrong",
+            "role": "R",
+            "stu_id": "2017123005",
+            "realname": "测试姓名5",
+            "college": "软件学院",
+            "department": "软件工程",
+            "grade": 2017,
+            "cf_id": "wrong_cf_id_5",
+            "vj_id": "wrong_vj_id_5"
+        },
+        {
+            "email": "wrong12@wrong.wrong",
+            "role": "R",
+            "stu_id": "2017123006",
+            "realname": "测试姓名6",
+            "college": "软件学院",
+            "department": "软件工程",
+            "grade": 2017,
+            "cf_id": "wrong_cf_id_6",
+            "vj_id": "wrong_vj_id_6"
+        }
+    ]
+}

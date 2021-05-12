@@ -74,14 +74,7 @@
 #### 1.2 向用户提供的邮箱发送验证码
 
 * `/user/email-verification/<str:email>/`:`POST`
-* 200
-
-```json
-{
-    "email": "xxx@xxx.xxx"
-}
-```
-
+* 204
 * 400
 
 ```json

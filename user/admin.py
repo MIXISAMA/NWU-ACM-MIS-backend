@@ -11,21 +11,19 @@ class UserAdmin(admin.ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('nickname', 'email', 'realname', 'stu_id')
+    list_display = ('nickname', 'email')
     list_filter = ('role',)
     # list_per_page = 10
 
     fieldsets = (
         ('账号信息', {'fields': (
-            'stu_id',
             'email',
             'nickname',
-            'realname',
             'avatar',
             'date_joined',
             'password',
         )}),
-        ('其他信息', {'fields': ('cf_id', 'need_peer', 'college')}),
+        ('其他信息', {'fields': ('college',)}),
         ('用户类型', {'fields': ('role',)}),
         ('高级设置', {
             'classes': ('collapse',),
@@ -45,7 +43,7 @@ class UserAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    search_fields = ('stu_id', 'email')
+    search_fields = ('email', 'nickname')
     ordering = ('date_joined',)
     # filter_horizontal = ()
 
@@ -69,3 +67,11 @@ class UserAdmin(admin.ModelAdmin):
 class _(admin.ModelAdmin):
     list_display = ('email', 'code')
 
+    def has_add_permission(self, request):
+        return False
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        return False

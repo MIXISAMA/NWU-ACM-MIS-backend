@@ -1,0 +1,74 @@
+[
+    {
+        "email": "wrong1@wrong.wrong",
+        "nickname": "测试本校生1",
+        "role": "I",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong2@wrong.wrong",
+        "nickname": "测试本校生2",
+        "role": "I",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong3@wrong.wrong",
+        "nickname": "测试教练1",
+        "role": "C",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong4@wrong.wrong",
+        "nickname": "测试教练2",
+        "role": "C",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong5@wrong.wrong",
+        "nickname": "测试外校人士1",
+        "role": "E",
+        "college": "西北工业大学"
+    },
+    {
+        "email": "wrong6@wrong.wrong",
+        "nickname": "测试外校人士2",
+        "role": "E",
+        "college": "哈尔滨工业大学"
+    },
+    {
+        "email": "wrong7@wrong.wrong",
+        "nickname": "测试队员1",
+        "role": "M",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong8@wrong.wrong",
+        "nickname": "测试队员2",
+        "role": "M",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong9@wrong.wrong",
+        "nickname": "测试队员3",
+        "role": "M",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong10@wrong.wrong",
+        "nickname": "测试昵称4",
+        "role": "M",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong11@wrong.wrong",
+        "nickname": "测试昵称5",
+        "role": "M",
+        "college": "西北大学"
+    },
+    {
+        "email": "wrong12@wrong.wrong",
+        "nickname": "测试昵称6",
+        "role": "M",
+        "college": "西北大学"
+    }
+]
