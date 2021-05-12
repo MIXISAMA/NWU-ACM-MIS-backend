@@ -4,9 +4,11 @@ from django.core.mail import send_mail
 from django.contrib import admin
 from django.shortcuts import HttpResponseRedirect
 
+from markdownx.admin import MarkdownxModelAdmin
+
 from NWU_ACM_MIS import settings
 from member.models import Member
-from plan.models import Plan
+from plan.models import Plan, Announcement
 
 mail_content_template = '''
 我们发布了一个新的计划: {}
@@ -87,3 +89,10 @@ class PlanAdmin(admin.ModelAdmin):
             self.message_user(request, message)
             return HttpResponseRedirect('.')
         return super().response_change(request, obj)
+
+@admin.register(Announcement)
+class AnnouncementAdmin(MarkdownxModelAdmin):
+    list_display = ('title', 'created_date', 'changed_date')
+    ordering = ('-created_date',)
+    fields = ('title', 'content', 'created_date', 'changed_date')
+    readonly_fields = ('created_date', 'changed_date')

@@ -1,5 +1,7 @@
 from django.db import models
 
+from markdownx.models import MarkdownxField
+
 from member.models import Member
 
 class Plan(models.Model):
@@ -24,6 +26,22 @@ class Plan(models.Model):
         verbose_name='通知队员'
     )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = verbose_name_plural = '任务计划'
+
+class Announcement(models.Model):
+
+    title = models.CharField('标题', max_length=64)
+    content = MarkdownxField('内容')
+    created_date = models.DateField('发布日期', auto_now_add=True)
+    changed_date = models.DateField('最后修改日期', auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = verbose_name_plural = '公告'
 
