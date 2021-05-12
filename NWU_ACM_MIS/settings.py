@@ -32,7 +32,9 @@ ALLOWED_HOSTS = ['*',]
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    
+    'admin_interface',
+    'colorfield',
+
     'NWU_ACM_MIS.apps.MyAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'markdownx',
 
     'user',
     'member',
@@ -66,7 +69,7 @@ ROOT_URLCONF = 'NWU_ACM_MIS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,6 +84,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'NWU_ACM_MIS.wsgi.application'
 
+X_FRAME_OPTIONS='SAMEORIGIN'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
