@@ -44,7 +44,7 @@ class UserAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ('email', 'nickname')
-    ordering = ('date_joined',)
+    ordering = ('-date_joined',)
     # filter_horizontal = ()
 
     def get_fieldsets(self, request, obj=None):

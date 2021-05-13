@@ -1,7 +1,7 @@
 from django.core import mail
 from django.test import TestCase, Client
 
-from user.models import User, Verification
+from user.models import Verification
 from rest_framework.authtoken.models import Token
 
 class AccountTestCase(TestCase):
