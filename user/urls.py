@@ -1,11 +1,18 @@
-from django.urls import path
+from django.urls import path, include
 
-from user.views import email_register, email_verification, EmailAuthToken
+from rest_framework.routers import SimpleRouter
 
-app_name = 'user'
+from user.views import (
+    email_register, email_verification, EmailAuthToken,
+    UserAPIView
+)
+
+router = SimpleRouter()
+router.register('user', UserAPIView, 'user')
 
 urlpatterns =[
     path('email-verification/<str:email>/', email_verification),
-    path('email-register/', email_register),
-    path('email-login/', EmailAuthToken.as_view()),
+    path('email-register/',                 email_register),
+    path('email-login/',                    EmailAuthToken.as_view()),
+    path('', include(router.urls)),
 ]

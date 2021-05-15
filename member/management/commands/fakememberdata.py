@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         commands_path = os.path.abspath(os.path.dirname(__file__))
-        with open(commands_path + '/fakememberdata.json') as f:
+        with open(commands_path + '/fakememberdata.json', encoding='utf-8') as f:
             fake_data = json.load(f)
         for fake in fake_data['Team']:
             team, created = Team.objects.update_or_create(

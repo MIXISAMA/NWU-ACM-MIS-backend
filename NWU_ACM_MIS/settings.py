@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'member',
     'contest',
     'plan',
+
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
