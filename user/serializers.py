@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 
 from user.models import User, Verification
@@ -6,17 +7,20 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'stu_id',
             'email',
-            'is_verified',
-            'cf_id',
             'nickname',
-            'realname',
-            'need_peer',
             'avatar',
+            'role',
+            'college',
+            'date_joined',
         ]
-        read_only = ['stu_id', 'email', 'is_verified', 'realname']
+        read_only_fields = ['email', 'avatar', 'role', 'date_joined']
 
+class UserAvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'avatar']
+        read_only_fields = ('email',)
 
 class VerificationSerializer(serializers.ModelSerializer):
     class Meta:

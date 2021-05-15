@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
+from django.utils.html import format_html
 
 from user.models import User, Verification
 from user.form import UserCreationForm, UserChangeForm
@@ -11,7 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('nickname', 'email')
+    list_display = ('avatar_image', 'email', 'nickname', 'role')
     list_filter = ('role',)
     # list_per_page = 10
 
@@ -46,6 +47,20 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('email', 'nickname')
     ordering = ('-date_joined',)
     # filter_horizontal = ()
+
+    def avatar_image(self, obj: User):
+        if not obj.avatar.name:
+            return "未设置头像"
+        return format_html(
+            '<div style="'
+            'border-radius: 30px;'
+            'width:50px;'
+            'height:50px;'
+            'background: url({}) no-repeat center;'
+            'background-size:auto 50px;"></div>',
+            obj.avatar.url,
+        )
+    avatar_image.short_description = '头像'
 
     def get_fieldsets(self, request, obj=None):
         if not obj:
