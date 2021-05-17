@@ -1,9 +1,13 @@
-from django.urls import path
-from member.views import UserList
+from django.urls import path, include
+
+from rest_framework.routers import SimpleRouter
+
+from member.views import MemberAPIView, MemberSelfAPIView
+
+router = SimpleRouter()
+router.register('member', MemberAPIView, 'member')
+router.register('self', MemberSelfAPIView, 'member_self')
 
 urlpatterns = [
-    path('user', UserList.as_view()),
-    path('user/<int:pk>', UserList.as_view()),
-    # path('region', RegionList.as_view()),
-    # path('region/<int:pk>', RegionList.as_view()),
+    path('', include(router.urls)),
 ]

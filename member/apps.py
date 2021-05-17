@@ -7,3 +7,5 @@ class MemberConfig(AppConfig):
 
     admin_display_priority = 2
 
+    def ready(self):
+        import member.signals

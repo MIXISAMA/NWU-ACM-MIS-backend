@@ -3,6 +3,12 @@ from rest_framework import serializers
 
 from user.models import User, Verification
 
+class UserConciseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'nickname', 'avatar')
+        read_only_fields = fields
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

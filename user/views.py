@@ -2,12 +2,11 @@ import random, string, smtplib
 
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
 
 from rest_framework import mixins, status, permissions
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import (
-    action, api_view, permission_classes, authentication_classes
+    action, api_view, permission_classes
 )
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -16,7 +15,8 @@ from rest_framework.authtoken.models import Token
 from util.rest import detail
 from user.models import User, Verification
 from user.serializers import (
-    UserAvatarSerializer, UserSerializer ,VerificationSerializer, EmailRegisterSerializer
+    UserAvatarSerializer, UserSerializer,
+    VerificationSerializer, EmailRegisterSerializer,
 )
 
 @api_view(['POST'])
