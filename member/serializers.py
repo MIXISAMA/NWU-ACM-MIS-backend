@@ -4,18 +4,6 @@ from user.models import User
 from user.serializers import UserSerializer, UserConciseSerializer
 from member.models import Achievement, Member, Team
 
-class TeamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Team
-        fields = ('id', 'name_ch', 'name_en')
-        read_only_fields = ('id',)
-
-class AchievementsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Achievement
-        fields = ('id', 'name', 'level', 'detail')
-        read_only_fields = fields
-
 class MemberConciseSerializer(serializers.ModelSerializer):
     user = UserConciseSerializer()
     class Meta:
@@ -26,6 +14,19 @@ class MemberConciseSerializer(serializers.ModelSerializer):
             'realname',
             'stu_id',
         )
+        read_only_fields = fields
+
+class TeamSerializer(serializers.ModelSerializer):
+    members = MemberConciseSerializer(many=True, read_only=True)
+    class Meta:
+        model = Team
+        fields = ('id', 'name_ch', 'name_en', 'members')
+        read_only_fields = ('id', 'members')
+
+class AchievementsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Achievement
+        fields = ('id', 'name', 'level', 'detail')
         read_only_fields = fields
 
 class MemberSerializer(serializers.ModelSerializer):

@@ -22,7 +22,7 @@
     - [2.2 获取某一队员信息 `GET` `/member/member/<str:email>/`](#22-获取某一队员信息-get-membermemberstremail)
     - [2.3 修改队员信息 `PATCH|PUT` `/member/member/<str:email>/`](#23-修改队员信息-patchput-membermemberstremail)
     - [2.4 加入某一队伍 `POST` `/member/join-team/<int:team_id>/`](#24-加入某一队伍-post-memberjoin-teamintteam_id)
-    - [2.5 退出当前队伍 `DELETE` `/member/leave-team/`](#25-退出当前队伍-delete-memberleave-team)
+    - [2.5 请离当前队伍中某队员 `DELETE` `/member/leave-team/<str:email>/`](#25-请离当前队伍中某队员-delete-memberleave-teamstremail)
     - [2.6 添加自己的标签 `POST` `/member/tag/<str:tag_name>/`](#26-添加自己的标签-post-membertagstrtag_name)
     - [2.7 删除自己的标签 `DELETE` `/member/tag/<str:tag_name>/`](#27-删除自己的标签-delete-membertagstrtag_name)
     - [2.8 获取所有队伍信息 `GET` `/member/team/`](#28-获取所有队伍信息-get-memberteam)
@@ -269,7 +269,29 @@ role:
     "team": {
         "id": 1,
         "name_ch": "测试队伍1",
-        "name_en": "test_team_1"
+        "name_en": "test_team_1",
+        "members": [
+            {
+                "user": {
+                    "email": "wrong11@wrong.wrong",
+                    "nickname": "测试昵称5",
+                    "avatar": "http://127.0.0.1:8070/media/avatar/avatar_ISMz23z.jpg"
+                },
+                "role": "R",
+                "realname": "测试姓名5",
+                "stu_id": "2017123005"
+            },
+            {
+                "user": {
+                    "email": "wrong12@wrong.wrong",
+                    "nickname": "测试昵称6",
+                    "avatar": "http://127.0.0.1:8070/media/avatar/avatar_VYEbS3z.jpg"
+                },
+                "role": "R",
+                "realname": "测试姓名6",
+                "stu_id": "2017123006"
+            }
+        ]
     },
     "tags": [
         "dalao",
@@ -306,31 +328,149 @@ role:
 
 - 成功状态码 `200`
 
-response结果与查询相同
+response结果与查询队员信息相同
 
 ### 2.4 加入某一队伍 `POST` `/member/join-team/<int:team_id>/`
 
-### 2.5 退出当前队伍 `DELETE` `/member/leave-team/`
+- 成功状态码 `204`
+
+### 2.5 请离当前队伍中某队员 `DELETE` `/member/leave-team/<str:email>/`
+
+可以用`self`表示自己的email
+
+- 成功状态码 `204`
+
+- 状态码 `403`
+
+```json
+{
+    "detail": "未加入任何队伍"
+}
+```
+
+- 状态码 `403`
+
+```json
+{
+    "detail": "队伍中无此人"
+}
+```
 
 ### 2.6 添加自己的标签 `POST` `/member/tag/<str:tag_name>/`
 
+- 成功状态码 `204`
+
 ### 2.7 删除自己的标签 `DELETE` `/member/tag/<str:tag_name>/`
 
+- 成功状态码 `204`
+
 ### 2.8 获取所有队伍信息 `GET` `/member/team/`
+
+- 成功状态码 `200`
+
+```json
+[
+    {
+        "id": 1,
+        "name_ch": "测试队伍1",
+        "name_en": "test_team_1",
+        "members": [
+            {
+                "user": {
+                    "email": "wrong11@wrong.wrong",
+                    "nickname": "测试昵称5",
+                    "avatar": "http://127.0.0.1:8070/media/avatar/avatar_ISMz23z.jpg"
+                },
+                "role": "R",
+                "realname": "测试姓名5",
+                "stu_id": "2017123005"
+            },
+            {
+                "user": {
+                    "email": "wrong12@wrong.wrong",
+                    "nickname": "测试昵称6",
+                    "avatar": "http://127.0.0.1:8070/media/avatar/avatar_VYEbS3z.jpg"
+                },
+                "role": "R",
+                "realname": "测试姓名6",
+                "stu_id": "2017123006"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name_ch": "测试队伍2",
+        "name_en": "test_team_2",
+        "members": []
+    }
+]
+```
 
 ### 2.9 获取某一队伍信息 `GET` `/member/team/<int:team_id>/`
 
 可以用`-1`表示自己队伍的id
 
+- 成功状态码 `200`
+
+```json
+{
+    "id": 1,
+    "name_ch": "测试队伍1",
+    "name_en": "test_team_1",
+    "members": [
+        {
+            "user": {
+                "email": "wrong11@wrong.wrong",
+                "nickname": "测试昵称5",
+                "avatar": "http://127.0.0.1:8070/media/avatar/avatar_ISMz23z.jpg"
+            },
+            "role": "R",
+            "realname": "测试姓名5",
+            "stu_id": "2017123005"
+        },
+        {
+            "user": {
+                "email": "wrong12@wrong.wrong",
+                "nickname": "测试昵称6",
+                "avatar": "http://127.0.0.1:8070/media/avatar/avatar_VYEbS3z.jpg"
+            },
+            "role": "R",
+            "realname": "测试姓名6",
+            "stu_id": "2017123006"
+        }
+    ]
+}
+```
+
 ### 2.10 创建并加入队伍 `POST` `/member/team/`
+
+|字段名|类型|例子|备注|必填|
+|-|-|-|-|-|
+|name_ch|str|纸片人|中文队名|✅|
+|name_en|str|need a leg|英文队名|✅|
+
+- 成功状态码 `201`
+
+response结果与查询队伍信息相同
 
 ### 2.11 修改队伍的信息 `PATCH|PUT` `/member/team/<int:team_id>/`
 
 只能修改自己的队伍，可以用`-1`表示自己队伍的id
 
+|字段名|类型|例子|备注|必填|
+|-|-|-|-|-|
+|name_ch|str|纸片人|中文队名||
+|name_en|str|need a leg|英文队名||
+
+- 成功状态码 `200`
+
+response结果与查询队伍信息相同
+
 ### 2.12 解散队伍 `DELETE` `/member/team/<int:tead_id>/`
 
 只能解散自己的队伍，可以用`-1`表示自己队伍的id
+
+- 成功状态码 `204`
 
 ## 3 任务计划
 
