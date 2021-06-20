@@ -1,24 +1,36 @@
 # nwu-acm-mis-backend
 
 
-## Django install
+
+## Requirements install
 ```
-pipenv install django==3.2
+conda activate your_env_name
 ```
+```
+pip install -r requirements.txt
+```
+
+## Modify e-mail address
+
+**./NWU_ACM_MIS/config.py**
+
+EMAIL_HOST_USER = f'your NWU e-mail address'
+
+EMAIL_HOST_PASSWORD = 'your password'
+
 
 ## Datebase migrate
 ```
-pipenv run python manage.py makemigrations
-pipenv run python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
-
 ## Run 
 ```
-pipenv run python manage.py runserver
+python manage.py runserver
 ```
 
 ## Crate superuser
 ```
-pipenv run python manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
