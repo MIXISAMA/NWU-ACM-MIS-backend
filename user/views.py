@@ -86,7 +86,7 @@ class EmailAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         """邮箱&密码登入"""
         response = super().post(request, *args, **kwargs)
-        response.data['token'] = 'Token '+response.data['token']
+        response.data['token'] = 'Token%20' + response.data['token']
         # response.set_cookie('token', response.data['token'], secure=True, samesite='None') # https
         response.set_cookie('token', response.data['token']) # http
         return response

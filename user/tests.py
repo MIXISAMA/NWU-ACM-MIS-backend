@@ -58,7 +58,7 @@ class AccountTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         token = Token.objects.get(user__email=email)
-        self.assertEqual(response.json()['token'], 'Token ' + token.key)
+        self.assertEqual(response.json()['token'], 'Token%20' + token.key)
 
         user: User = User.objects.get(email=email)
         user.avatar.delete()
