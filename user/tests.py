@@ -47,7 +47,7 @@ class AccountTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 201)
         token = Token.objects.get(user__email=email)
-        self.assertEqual(response.json()['token'], 'Token ' + token.key)
+        self.assertEqual(response.json()['token'], 'Token%20' + token.key)
         # 登陆
         response = client.post(
             '/user/email-login/',
@@ -120,3 +120,17 @@ class UserTestCase(TestUtilsMixin, APITransactionTestCase):
         url = reverse('user-detail', args=[self.u1.email])
         response = self.client.patch(url, {'nickname': 'changed nickname'})
         self.assertEqual(response.status_code, 403)
+
+    def test_get_self_user_user_info(self):
+        """测试 权鉴通过后获取自己的用户信息"""
+        self.login('u1')
+        response = self.client.get('/user/self/')
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {
+            'email': self.u1.email,
+            'nickname': self.u1.nickname,
+            'role': str(self.u1.role),
+            'avatar': self.u1.avatar.url,
+            'date_joined': to_time_zone(self.u1.date_joined),
+            'college': self.u1.college,
+        })

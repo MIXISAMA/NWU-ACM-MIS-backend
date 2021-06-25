@@ -17,6 +17,7 @@
     - [1.4 查询用户信息 `GET` `/user/user/<str:email>/`](#14-查询用户信息-get-useruserstremail)
     - [1.5 修改用户信息 `PATCH|PUT` `/user/user/<str:email>/`](#15-修改用户信息-patchput-useruserstremail)
     - [1.6 上传用户头像 `POST|PUT` `/user/user/<str:email>/avatar/`](#16-上传用户头像-postput-useruserstremailavatar)
+    - [1.7 获取自己的用户信息 `GET` `/user/self/`](#17-获取自己的用户信息-get-userself)
   - [2 协会队员](#2-协会队员)
     - [2.1 获取所有队员信息 `GET` `/member/member/`](#21-获取所有队员信息-get-membermember)
     - [2.2 获取某一队员信息 `GET` `/member/member/<str:email>/`](#22-获取某一队员信息-get-membermemberstremail)
@@ -207,6 +208,21 @@ role:
     "avatar": "/media/avatar/avatar_Pznn3VO.jpg",
     "date_joined": "2021-05-14T20:41:30.022715+08:00",
     "college": "西北工业大学"
+}
+```
+
+### 1.7 获取自己的用户信息 `GET` `/user/self/`
+
+- 成功状态码 `200`
+
+```json
+{
+    "email": "user_email@xx.xx",
+    "nickname": "user nickname",
+    "role": "I",
+    "avatar": "/media/avatar/avatar_Pznn3VO.jpg",
+    "date_joined": "2021-05-14T20:41:30.022715+08:00",
+    "college": "西北大学"
 }
 ```
 

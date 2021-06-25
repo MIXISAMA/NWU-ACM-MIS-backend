@@ -39,7 +39,7 @@ def email_register(request):
     verification.delete()
     serializer.save()
     response = Response(serializer.validated_data, status.HTTP_201_CREATED)
-    response.data['token'] = 'Token '+ Token.objects.get(user__email=user_email).key
+    response.data['token'] = 'Token%20'+ Token.objects.get(user__email=user_email).key
     response.set_cookie('token', response.data['token'])
     return response
 
@@ -118,3 +118,9 @@ class UserAPIView(mixins.UpdateModelMixin,
             serializer_class=UserAvatarSerializer)
     def upload_avatar(self, request, email):
         return self.update(request)
+
+@api_view(['GET'])
+def self_user_info(request):
+    """获取自己的用户信息"""
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
