@@ -15,7 +15,7 @@ from rest_framework.authtoken.models import Token
 from util.rest import detail
 from user.models import User, Verification
 from user.serializers import (
-    UserAvatarSerializer, UserSerializer,
+    UserAvatarSerializer, UserSerializer, UserConciseSerializer,
     VerificationSerializer, EmailRegisterSerializer,
 )
 
@@ -122,5 +122,5 @@ class UserAPIView(mixins.UpdateModelMixin,
 @api_view(['GET'])
 def self_user_info(request):
     """获取自己的用户信息"""
-    serializer = UserSerializer(request.user)
+    serializer = UserConciseSerializer(request.user)
     return Response(serializer.data)

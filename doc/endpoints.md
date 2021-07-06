@@ -31,6 +31,7 @@
     - [2.10 创建并加入队伍 `POST` `/member/team/`](#210-创建并加入队伍-post-memberteam)
     - [2.11 修改队伍的信息 `PATCH|PUT` `/member/team/<int:team_id>/`](#211-修改队伍的信息-patchput-memberteamintteam_id)
     - [2.12 解散队伍 `DELETE` `/member/team/<int:tead_id>/`](#212-解散队伍-delete-memberteaminttead_id)
+    - [2.13 获取用户信息以及扩展队员信息 `GET` `/member/user/<str:email>/`](#213-获取用户信息以及扩展队员信息-get-memberuserstremail)
   - [3 任务计划](#3-任务计划)
     - [3.1 获取所有公告 `GET` `/plan/announcement/`](#31-获取所有公告-get-planannouncement)
     - [3.2 获取单个公告 `GET` `/plan/announcement/<int:id>/`](#32-获取单个公告-get-planannouncementintid)
@@ -217,12 +218,10 @@ role:
 
 ```json
 {
-    "email": "user_email@xx.xx",
-    "nickname": "user nickname",
-    "role": "I",
-    "avatar": "/media/avatar/avatar_Pznn3VO.jpg",
-    "date_joined": "2021-05-14T20:41:30.022715+08:00",
-    "college": "西北大学"
+    "email": "wrong12@wrong.wrong",
+    "nickname": "测试昵称6",
+    "avatar": "/media/avatar/avatar_VYEbS3z.jpg",
+    "role": "M"
 }
 ```
 
@@ -487,6 +486,85 @@ response结果与查询队员信息相同
 只能解散自己的队伍，可以用`-1`表示自己队伍的id
 
 - 成功状态码 `204`
+
+### 2.13 获取用户信息以及扩展队员信息 `GET` `/member/user/<str:email>/`
+
+获取用户信息，权限合适则扩展队员信息，不合适则与`/user/user/<str:email>/`接口相同
+
+- 成功状态码 `200`
+
+```json
+{
+    "email": "wrong12@wrong.wrong",
+    "nickname": "测试昵称6",
+    "avatar": "/media/avatar/avatar_VYEbS3z.jpg",
+    "role": "M",
+    "biography": "",
+    "school": "西边北大",
+    "organization": null,
+    "city": null,
+    "homepage": null,
+    "date_joined": "2021-05-15T17:30:06.321773+08:00",
+    "member": {
+        "role": "R",
+        "stu_id": "2017123006",
+        "realname": "测试姓名6",
+        "college": "软件学院",
+        "department": "软件工程",
+        "grade": 2017,
+        "cf_id": "wrong_cf_id_6",
+        "vj_id": "wrong_vj_id_6",
+        "need_peer": false,
+        "team": {
+            "id": 1,
+            "name_ch": "测试队伍1",
+            "name_en": "test_team_1",
+            "members": [
+                {
+                    "user": {
+                        "email": "wrong11@wrong.wrong",
+                        "nickname": "测试昵称5",
+                        "avatar": "/media/avatar/avatar_ISMz23z.jpg",
+                        "role": "M"
+                    },
+                    "role": "R",
+                    "realname": "测试姓名5",
+                    "stu_id": "2017123005"
+                },
+                {
+                    "user": {
+                        "email": "wrong12@wrong.wrong",
+                        "nickname": "测试昵称6",
+                        "avatar": "/media/avatar/avatar_VYEbS3z.jpg",
+                        "role": "M"
+                    },
+                    "role": "R",
+                    "realname": "测试姓名6",
+                    "stu_id": "2017123006"
+                }
+            ]
+        },
+        "tags": [
+            "dalao",
+            "计算几何"
+        ],
+        "achievements": [
+            {
+                "id": 1,
+                "name": "自闭冠军",
+                "level": 2,
+                "detail": "人都要没了"
+            },
+            {
+                "id": 2,
+                "name": "500题达成",
+                "level": 2,
+                "detail": "vj+cf的过题数达到500"
+            }
+        ]
+    }
+}
+```
 
 ## 3 任务计划
 

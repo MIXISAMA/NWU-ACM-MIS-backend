@@ -24,7 +24,13 @@ class UserAdmin(admin.ModelAdmin):
             'date_joined',
             'password',
         )}),
-        ('其他信息', {'fields': ('college',)}),
+        ('其他信息', {'fields': (
+            'biography',
+            'school',
+            'organization',
+            'city',
+            'homepage',
+        )}),
         ('用户类型', {'fields': ('role',)}),
         ('高级设置', {
             'classes': ('collapse',),

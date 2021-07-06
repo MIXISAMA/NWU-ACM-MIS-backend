@@ -1,7 +1,10 @@
-from rest_framework import mixins, permissions, status
 from django.http import Http404
+from django.contrib.auth.models import AnonymousUser
+
+from rest_framework import mixins, permissions, status
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
+from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import api_view, permission_classes
 
@@ -13,6 +16,9 @@ from member.serializers import (
 from member.permissions import (
     IsMember, IsCoachAndReadOnly, IsSelfOrReadOnly, IsSelfTeamOrReadOnly
 )
+
+from user.views import UserAPIView
+from user.models import User
 
 class MemberAPIView(mixins.ListModelMixin,
                     mixins.RetrieveModelMixin,
@@ -115,3 +121,23 @@ class TeamAPIView(mixins.ListModelMixin,
         member.save(update_fields=['team'])
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+@api_view(['GET'])
+@permission_classes([])
+def user_member_info(request, email):
+    """获取用户信息，权限合适则扩展队员信息，不合适则与`/user/user/<str:email>/`接口相同"""
+    target: User = get_object_or_404(User.objects.filter(is_banned=False), email=email)
+    inquirer: User = request.user
+    
+    if (not isinstance(inquirer, AnonymousUser)) \
+            and inquirer.role in (User.Role.MEMBER, User.Role.COACH) \
+            and target.role == User.Role.MEMBER :
+        # 查询者与被查者都为队内人员
+        serializer = MemberSerializer(target.member)
+        member_data = dict(serializer.data)
+        user_data = member_data.pop('user')
+        user_data['member'] = member_data
+        return Response(user_data)
+
+    return UserAPIView.as_view({'get': 'retrieve'})(request._request, email=email)

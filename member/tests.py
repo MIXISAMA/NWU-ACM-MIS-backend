@@ -32,6 +32,7 @@ class MemberTestCase(TestUtilsMixin, APITransactionTestCase):
                     'email': member.user.email,
                     'nickname': member.user.nickname,
                     'avatar': 'http://testserver' + member.user.avatar.url,
+                    'role': str(member.user.role),
                 },
                 'role': str(member.role),
                 'realname': member.realname,
@@ -55,6 +56,17 @@ class MemberTestCase(TestUtilsMixin, APITransactionTestCase):
         self.patch_test_one(url, 'vj_id', 'changed_vj')
         self.patch_test_one(url, 'cf_id', 'changed_cf')
         self.patch_test_one(url, 'user.nickname', '修改名')
+    
+    def test_get_one_user_member(self):
+        """测试 查询用户附带队员信息"""
+        url = reverse('user-member-detail', args=[self.m2.user.email])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse('member' in response.json())
+        self.login('m1')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('member' in response.json())
 
 class TagTestCase(TestUtilsMixin, APITransactionTestCase):
     def setUp(self):

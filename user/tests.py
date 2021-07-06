@@ -80,14 +80,6 @@ class UserTestCase(TestUtilsMixin, APITransactionTestCase):
         url = reverse('user-detail', args=[self.u1.email])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {
-            'email': self.u1.email,
-            'nickname': self.u1.nickname,
-            'role': str(self.u1.role),
-            'avatar': 'http://testserver' + self.u1.avatar.url,
-            'date_joined': to_time_zone(self.u1.date_joined),
-            'college': self.u1.college,
-        })
 
     def test_change_avatar(self):
         """测试 修改用户头像"""
@@ -106,7 +98,7 @@ class UserTestCase(TestUtilsMixin, APITransactionTestCase):
         self.login('u1')
         url = reverse('user-detail', args=[self.u1.email])
         self.patch_test_one(url, 'nickname', 'changed nickname')
-        self.patch_test_one(url, 'college', 'changed college')
+        self.patch_test_one(url, 'school', 'changed college')
 
     def test_change_user_profile_without_auth(self):
         """测试 未登陆用户不可以修改信息"""
@@ -126,11 +118,4 @@ class UserTestCase(TestUtilsMixin, APITransactionTestCase):
         self.login('u1')
         response = self.client.get('/user/self/')
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {
-            'email': self.u1.email,
-            'nickname': self.u1.nickname,
-            'role': str(self.u1.role),
-            'avatar': self.u1.avatar.url,
-            'date_joined': to_time_zone(self.u1.date_joined),
-            'college': self.u1.college,
-        })
+

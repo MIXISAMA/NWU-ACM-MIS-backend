@@ -6,7 +6,7 @@ from user.models import User, Verification
 class UserConciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'nickname', 'avatar')
+        fields = ('email', 'nickname', 'avatar', 'role')
         read_only_fields = fields
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,7 +17,11 @@ class UserSerializer(serializers.ModelSerializer):
             'nickname',
             'avatar',
             'role',
-            'college',
+            'biography',
+            'school',
+            'organization',
+            'city',
+            'homepage',
             'date_joined',
         ]
         read_only_fields = ['email', 'avatar', 'role', 'date_joined']

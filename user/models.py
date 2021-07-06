@@ -47,7 +47,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     role = models.CharField('用户类型', max_length=1, choices=Role.choices, default=Role.EXTERNAL)
     date_joined = models.DateTimeField('账号创建日期', auto_now_add=True)
 
-    college = models.CharField('学校', max_length=24, null=True, blank=True, default=None)
+    biography = models.TextField('个人陈述', blank=True, default='')
+    school = models.CharField('学校', max_length=24, null=True, blank=True, default=None)
+    organization = models.CharField('组织', max_length=24, null=True, blank=True, default=None)
+    city = models.CharField('城市', max_length=24, null=True, blank=True, default=None)
+    homepage = models.URLField('个人主页', null=True, blank=True, default=None)
 
     is_banned = models.BooleanField('是否拉黑', default=False, help_text='拉黑后无法重新注册')
 
